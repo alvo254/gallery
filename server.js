@@ -13,10 +13,12 @@ let image = require('./routes/image');
 
 
 // connecting the database
-let mongodb_url = 'mongodb+srv://gallery.uowqa7l.mongodb.net/gallery';
-let dbName = 'gallery';
+// mongosh "mongodb+srv://gallery.uowqa7l.mongodb.net/myFirstDatabase" --apiVersion 1 --username alvo
+// mongodb+srv://alvo:barry1234@gallery.svei8sh.mongodb.net/?retryWrites=true&w=majority
+let mongodb_url = 'mongodb+srv://alvo:barry1234@gallery.svei8sh.mongodb.net/Gallery';
+let dbName = 'Gallery';
 
-mongoose.connect(`${mongodb_url}${dbName}`,{ useNewUrlParser: true , useUnifiedTopology: true }, (err)=>{
+mongoose.connect(`${mongodb_url}${dbName}`,{ useNewUrlParser: true , useUnifiedTopology: true,  }, (err)=>{
     if (err) console.log(err)
 });
 
