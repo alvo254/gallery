@@ -1,10 +1,15 @@
 pipeline{
     agent any
-    stage('Deploy to Heroku') {
-  steps {
-    withCredentials([usernameColonPassword(credentialsId: 'heroku', variable: 'HEROKU_CREDENTIALS' )]){
-      bat 'git push https://${HEROKU_CREDENTIALS}@git.heroku.com/shielded-hamlet-37777.git master'
+    stage('Workin'){
+        steps{
+            echo "Working fine"
+        }
     }
-  }
-} 
+//     stage('Deploy to Heroku') {
+//   steps {
+//     withCredentials([usernameColonPassword(credentialsId: 'heroku', variable: 'HEROKU_CREDENTIALS' )]){
+//       bat 'git push https://${HEROKU_CREDENTIALS}@git.heroku.com/shielded-hamlet-37777.git master'
+//     }
+//   }
+// } 
 }
