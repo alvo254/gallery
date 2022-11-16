@@ -1,16 +1,49 @@
 pipeline{
     agent any
+  stages { 
     stage('clone repository') {
-      steps { 
+      steps {
         git branch: 'main', url: 'https://github.com/alvo254/gallery'
       }
     }
     
-//     stage('Deploy to Heroku') {
-//   steps {
-//     withCredentials([usernameColonPassword(credentialsId: 'heroku', variable: 'HEROKU_CREDENTIALS' )]){
-//       bat 'git push https://${HEROKU_CREDENTIALS}@git.heroku.com/shielded-hamlet-37777.git master'
-//     }
-//   }
-// } 
+    //This is my debugginh step to see all available remote branches
+    stage('Get remote branches'){
+        steps{
+            bat 'git remote -v'
+        }
+    }
+    
+    stage('Show heroku stuff'){
+        steps{
+            bat '''
+                git branch -a
+                git remote -v
+
+            '''
+        }
+    }
+    
+  stage('Push to heroku'){
+    steps {
+      withCredentials([usernameColonPassword(credentialsId: 'heroku', variable: 'HEROKU_CREDENTIALS' )]){
+        bat 'git push https://${HEROKU_CREDENTIALS}@git.heroku.com/shielded-hamlet-37777.git master'
+          
+      }
+  }
+    }
+    
+    // stage('Add heroku to remote branches'){
+    //     steps{
+    //         bat 'git remote add origin https://git.heroku.com/shielded-hamlet-37777.git'
+    //     }
+    // }
+    
+    stage('Slack send'){
+        steps{
+            slackSend color: "good", message: "Message from Jenkins Pipeline"
+        }
+    }
+   
+  }
 }
