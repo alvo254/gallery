@@ -1,10 +1,11 @@
 pipeline{
     agent any
-    stage('Workin'){
-        steps{
-            echo "Working fine"
-        }
+    stage('clone repository') {
+      steps { 
+        git branch: 'main', url: 'https://github.com/alvo254/gallery'
+      }
     }
+    
 //     stage('Deploy to Heroku') {
 //   steps {
 //     withCredentials([usernameColonPassword(credentialsId: 'heroku', variable: 'HEROKU_CREDENTIALS' )]){
